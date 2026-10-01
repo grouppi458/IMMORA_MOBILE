@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../providers/auth_provider.dart';
-import '../../utils/constants.dart';
 import '../../utils/validators.dart';
 import '../widgets/auth_text_field.dart';
 import '../widgets/immora_logo.dart';
@@ -12,15 +11,6 @@ import '../widgets/primary_button.dart';
 import 'forgot_password_screen.dart';
 import 'home_screen.dart';
 import 'register_choice_screen.dart';
-
-/// Comptes de démonstration créés dans la base (voir data/demo_data.dart).
-const _demoAccounts = {
-  'Admin': 'admin@immora.tn',
-  'Agence': 'agence@immora.tn',
-  'Agent': 'agent@immora.tn',
-  'Client': 'client@immora.tn',
-  'Propriétaire': 'proprietaire@immora.tn',
-};
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -49,14 +39,6 @@ class _LoginScreenState extends State<LoginScreen> {
   void _onChanged(String _) {
     context.read<AuthProvider>().clearError();
     setState(() {}); // réévalue l'état du bouton
-  }
-
-  void _fillDemo(String role) {
-    context.read<AuthProvider>().clearError();
-    setState(() {
-      _emailCtrl.text = _demoAccounts[role]!;
-      _passwordCtrl.text = demoPassword;
-    });
   }
 
   Future<void> _login() async {
@@ -213,43 +195,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 20),
-        const Divider(color: AppColors.border),
-        const SizedBox(height: 12),
-        const Center(
-          child: Text(
-            'DÉMO — ENTRER PAR RÔLE',
-            style: TextStyle(
-              color: AppColors.textMuted,
-              fontSize: 11,
-              letterSpacing: 1.2,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-        const SizedBox(height: 12),
-        Center(
-          child: Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            alignment: WrapAlignment.center,
-            children: [
-              for (final role in _demoAccounts.keys)
-                OutlinedButton(
-                  onPressed: () => _fillDemo(role),
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: AppColors.textDark,
-                    side: const BorderSide(color: AppColors.border),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    padding: const EdgeInsets.symmetric(horizontal: 14),
-                  ),
-                  child: Text(role, style: const TextStyle(fontSize: 13)),
-                ),
             ],
           ),
         ),
