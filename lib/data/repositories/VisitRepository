@@ -1,0 +1,73 @@
+import 'package:sqflite/sqflite.dart';
+
+import '../../models/visit.dart';
+import '../database_helper.dart';
+
+class VisitRepository {
+  Future<Database> get _db => DatabaseHelper.instance.database;
+
+  Future<int> insert(Visit visit) async {
+    return (await _db).insert(
+      'visits',
+      visit.toMap()..remove('id'),
+    );
+  }
+
+  Future<List<Visit>> findByClientId(int clientId) async {
+    final rows = await (await _db).query(
+      'visits',
+      where: 'clientId = ?',
+      whereArgs: [clientId],
+      orderBy: 'scheduledAt ASC',
+    );
+
+    return rows.map(Visit.fromMap).toList();
+  }
+
+  Future<Visit?> findById(int id) async {
+    final rows = await (await _db).query(
+      'visits',
+      where: 'id = ?',
+      whereArgs: [id],
+      limit: 1,
+    );
+
+    return rows.isEmpty ? null : Visit.fromMap(rows.first);
+  }
+
+  Future<int> update(Visit visit) async {
+    if (visit.id == null) {
+      throw ArgumentError('Cannot update a visit without an id.');
+    }
+
+    return (await _db).update(
+      'visits',
+      visit.toMap()..remove('id'),
+      where: 'id = ?',
+      whereArgs: [visit.id],
+    );
+  }
+
+  Future<int> updateStatus(
+    int visitId,
+    VisitStatus status,
+  ) async {
+    return (await _db).update(
+      'visits',
+      {
+        'status': status.name,
+        'updatedAt': DateTime.now().millisecondsSinceEpoch,
+      },
+      where: 'id = ?',
+      whereArgs: [visitId],
+    );
+  }
+
+  Future<int> delete(int id) async {
+    return (await _db).delete(
+      'visits',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+}

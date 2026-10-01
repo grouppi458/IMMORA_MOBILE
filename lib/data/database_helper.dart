@@ -113,5 +113,31 @@ class DatabaseHelper {
       needsParking INTEGER DEFAULT 0,
       createdAt INTEGER NOT NULL
     )''',
+
+    '''
+CREATE TABLE favorites (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  clientId INTEGER NOT NULL REFERENCES clients(id) ON DELETE CASCADE,
+  propertyId INTEGER NOT NULL,
+  addedAt INTEGER NOT NULL,
+  UNIQUE(clientId, propertyId)
+)''',
+
+    '''
+CREATE TABLE visits (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  agencyId INTEGER NOT NULL REFERENCES agencies(id),
+  propertyId INTEGER NOT NULL,
+  clientId INTEGER NOT NULL REFERENCES clients(id) ON DELETE CASCADE,
+  agentId INTEGER REFERENCES agents(id),
+  scheduledAt INTEGER NOT NULL,
+  durationMinutes INTEGER NOT NULL DEFAULT 30,
+  status TEXT NOT NULL DEFAULT 'requested',
+  clientMessage TEXT,
+  agentNote TEXT,
+  clientRating INTEGER,
+  createdAt INTEGER NOT NULL,
+  updatedAt INTEGER NOT NULL
+)''',
   ];
 }

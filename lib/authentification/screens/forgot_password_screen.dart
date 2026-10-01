@@ -39,7 +39,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     setState(() => _loading = true);
 
     // L'app fonctionne hors ligne : on vérifie seulement que le compte existe.
-    final exists = await context.read<AuthProvider>().emailExists(_emailCtrl.text);
+    final exists = await context.read<AuthProvider>().emailExists(
+      _emailCtrl.text,
+    );
     if (!mounted) return;
     setState(() {
       _loading = false;
@@ -75,8 +77,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   color: Colors.white,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.lock_outline,
-                    size: 34, color: AppColors.secondary),
+                child: const Icon(
+                  Icons.lock_outline,
+                  size: 34,
+                  color: AppColors.secondary,
+                ),
               ),
             ),
             const SizedBox(height: 20),
@@ -89,7 +94,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             const Text(
               'Entrez votre email : vous recevrez un code\nde réinitialisation.',
               textAlign: TextAlign.center,
-              style: TextStyle(color: AppColors.textMuted, fontSize: 13, height: 1.4),
+              style: TextStyle(
+                color: AppColors.textMuted,
+                fontSize: 13,
+                height: 1.4,
+              ),
             ),
             const SizedBox(height: 40),
             AuthTextField(
