@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:immora_mobile/services/password_service.dart';
-import 'package:immora_mobile/utils/validators.dart';
+import 'package:immora_mobile/module_authentification/services/password_service.dart';
+import 'package:immora_mobile/core/utils/validators.dart';
 
 void main() {
   group('Validators.email', () {
@@ -51,6 +51,17 @@ void main() {
       expect(Validators.password('abc12'), isNotNull);
       expect(Validators.password('abcdefg'), isNotNull);
       expect(Validators.password('1234567'), isNotNull);
+    });
+  });
+
+  group('Validators.cin (BF1.2)', () {
+    test('accepte exactement 8 chiffres', () {
+      expect(Validators.cin('08123456'), isNull);
+    });
+    test('refuse vide, trop court ou avec lettres', () {
+      expect(Validators.cin(''), isNotNull);
+      expect(Validators.cin('1234567'), isNotNull);
+      expect(Validators.cin('1234567A'), isNotNull);
     });
   });
 

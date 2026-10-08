@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'app_colors.dart';
+import 'package:immora_mobile/core/theme/app_colors.dart';
 
 class AppTheme {
   AppTheme._();
