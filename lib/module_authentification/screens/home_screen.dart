@@ -7,7 +7,10 @@ import 'package:immora_mobile/core/theme/app_colors.dart';
 import 'package:immora_mobile/module_authentification/models/user.dart';
 import 'package:immora_mobile/module_authentification/providers/auth_provider.dart';
 import 'package:immora_mobile/core/utils/enums.dart';
+import 'package:immora_mobile/core/widgets/admin_widgets.dart';
 import 'package:immora_mobile/core/widgets/primary_button.dart';
+import 'package:immora_mobile/module_gestion_annonces/screens/client_shell.dart';
+import 'package:immora_mobile/module_gestion_annonces/screens/listing_list_screen.dart';
 import 'package:immora_mobile/module_authentification/screens/login_screen.dart';
 
 /// BF1.6 — redirection vers l'accueil propre au rôle après connexion.
@@ -15,7 +18,8 @@ import 'package:immora_mobile/module_authentification/screens/login_screen.dart'
 Widget homeForUser(User user) => switch (user.role) {
       UserRole.admin => const AdminShell(), // Module 2 : espace administrateur
       UserRole.agency => const AgencySpaceScreen(), // Module 2 : espace agence
-      _ => const HomeScreen(), // agent, client, propriétaire : modules 3 à 6
+      UserRole.client => const ClientShell(), // Module 5 : vitrine, favoris
+      _ => const HomeScreen(), // agent, propriétaire : modules 3 à 6
     };
 
 /// Accueil provisoire des rôles agent, client et propriétaire : les modules
@@ -70,10 +74,23 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(user.email, style: const TextStyle(color: AppColors.textMuted)),
                   const SizedBox(height: 24),
-                  const Text(
-                    'Votre espace est en cours de construction.',
-                    style: TextStyle(color: AppColors.textMuted),
-                  ),
+                  // Module 5 (Ing. 3) — l'agent gère les annonces de son agence.
+                  if (user.role == UserRole.agent && user.agencyId != null)
+                    WhiteCard(
+                      child: NavTile(
+                        icon: Icons.campaign_outlined,
+                        tone: toneGreen,
+                        title: 'Annonces de l’agence',
+                        subtitle: 'Publier, suspendre, prolonger · vues et favoris',
+                        onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                            builder: (_) => ListingListScreen(agencyId: user.agencyId!))),
+                      ),
+                    )
+                  else
+                    const Text(
+                      'Votre espace est en cours de construction.',
+                      style: TextStyle(color: AppColors.textMuted),
+                    ),
                   const Spacer(),
                   PrimaryButton(label: 'Se déconnecter', onPressed: () => _logout(context)),
                 ],

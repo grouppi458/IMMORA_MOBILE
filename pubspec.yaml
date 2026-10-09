@@ -44,6 +44,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   sqflite_common_ffi_web: ^1.0.2
+  flutter_map: ^8.3.2
+  latlong2: ^0.10.1
 
 dev_dependencies:
   flutter_test:
@@ -55,6 +57,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
+  # Base SQLite en mémoire pour tester les repositories (M5) sans téléphone.
+  sqflite_common_ffi: ^2.3.7
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -1,14 +1,23 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 
 import 'package:immora_mobile/core/theme/app_theme.dart';
 import 'package:immora_mobile/module_authentification/providers/auth_provider.dart';
 import 'package:immora_mobile/module_authentification/providers/user_admin_provider.dart';
 import 'package:immora_mobile/module_authentification/screens/splash_screen.dart';
 import 'package:immora_mobile/module_gestion_agences/providers/agency_provider.dart';
+import 'package:immora_mobile/module_gestion_annonces/providers/client_listing_provider.dart';
+import 'package:immora_mobile/module_gestion_annonces/providers/listing_provider.dart';
+import 'package:immora_mobile/module_gestion_annonces/providers/matching_provider.dart';
 
 void main() {
+  // Dans le navigateur, SQLite tourne en WebAssembly (fichier web/sqlite3.wasm)
+  // et la base est gardée dans IndexedDB ; sur Android, sqflite utilise la base native.
+  if (kIsWeb) databaseFactory = databaseFactoryFfiWebNoWebWorker;
   runApp(const ImmoraApp());
 }
 
@@ -23,6 +32,13 @@ class ImmoraApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         // Module 2 — agences et abonnements
         ChangeNotifierProvider(create: (_) => AgencyProvider()),
+        // Module 5 — annonces (côté agence / agent)
+        ChangeNotifierProvider(create: (_) => ListingProvider()),
+        // Module 5 — vitrine et favoris (côté client)
+        ChangeNotifierProvider(create: (_) => ClientListingProvider()),
+        // Module 5 — recherche intelligente, matching et alertes (fonction avancée)
+        ChangeNotifierProvider(
+            create: (ctx) => MatchingProvider(ctx.read<ClientListingProvider>())),
         // Module 1 — gestion des utilisateurs. Après chaque modification, il
         // demande au Module 2 de recharger ses compteurs (si l'espace admin
         // les a déjà chargés).

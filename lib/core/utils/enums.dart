@@ -23,6 +23,57 @@ const Map<String, String> agentSpecialities = {
   'luxe': 'Luxe',
 };
 
+// ---------- Biens (M3) : utilisés par les annonces (M5) ----------
+
+enum PropertyType { apartment, house, villa, land, office }
+
+/// Vente ou location (même valeurs que transactions.type du M4 : 'sale' | 'rent').
+enum DealType { sale, rent }
+
+enum PropertyStatus { available, reserved, sold, rented }
+
+// ---------- Annonces (M5) ----------
+
+/// brouillon → publiée ⇄ suspendue → expirée (fin de durée) ;
+/// retirée quand le bien est vendu ou loué (BF5.4).
+enum ListingStatus { draft, published, suspended, expired, withdrawn }
+
+extension PropertyTypeLabel on PropertyType {
+  String get label => switch (this) {
+        PropertyType.apartment => 'Appartement',
+        PropertyType.house => 'Maison',
+        PropertyType.villa => 'Villa',
+        PropertyType.land => 'Terrain',
+        PropertyType.office => 'Bureau',
+      };
+}
+
+extension DealTypeLabel on DealType {
+  String get label => switch (this) {
+        DealType.sale => 'Vente',
+        DealType.rent => 'Location',
+      };
+}
+
+extension PropertyStatusLabel on PropertyStatus {
+  String get label => switch (this) {
+        PropertyStatus.available => 'Disponible',
+        PropertyStatus.reserved => 'Réservé',
+        PropertyStatus.sold => 'Vendu',
+        PropertyStatus.rented => 'Loué',
+      };
+}
+
+extension ListingStatusLabel on ListingStatus {
+  String get label => switch (this) {
+        ListingStatus.draft => 'Brouillon',
+        ListingStatus.published => 'Publiée',
+        ListingStatus.suspended => 'Suspendue',
+        ListingStatus.expired => 'Expirée',
+        ListingStatus.withdrawn => 'Retirée',
+      };
+}
+
 extension UserRoleLabel on UserRole {
   String get label => switch (this) {
         UserRole.admin => 'Administrateur',

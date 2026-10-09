@@ -2,7 +2,10 @@ import 'package:immora_mobile/core/utils/enums.dart';
 
 // Base locale
 const String dbName = 'immo_saas.db';
-const int dbVersion = 2; // v2 : users.cin, users.address, table clients supprimée
+// v2 : users.cin, users.address, table clients supprimée
+// v3 (M5) : tables listings, favorites (+ properties provisoire en attendant le M3)
+// v4 (M5) : tables search_criteria, notifications (matching et alertes)
+const int dbVersion = 4;
 
 // Mot de passe des comptes de démonstration (données de démo uniquement).
 const String demoPassword = 'immora123';
@@ -20,6 +23,11 @@ const int subscriptionPeriodDays = 30;
 // Taux de commission d'un agent (en %).
 const double commissionMinPercent = 0.1;
 const double commissionMaxPercent = 20;
+
+// Annonces (M5) : durées de publication possibles (BF5.1) et limites du titre.
+const List<int> listingDurations = [30, 60, 90];
+const int listingTitleMinLength = 5;
+const int listingTitleMaxLength = 80;
 
 /// Valeurs par défaut de chaque plan d'abonnement.
 class PlanDefaults {

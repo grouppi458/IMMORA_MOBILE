@@ -13,6 +13,7 @@ import 'package:immora_mobile/module_authentification/screens/agent_performance_
 import 'package:immora_mobile/module_authentification/screens/login_screen.dart';
 import 'package:immora_mobile/module_gestion_agences/models/agency_views.dart';
 import 'package:immora_mobile/module_gestion_agences/providers/agency_provider.dart';
+import 'package:immora_mobile/module_gestion_annonces/screens/listing_list_screen.dart';
 
 /// Accueil du rôle « agence » (BF1.6) : son abonnement et ses limites (BF2.8),
 /// son score d'activité (BF2.6), ses agents et leur performance.
@@ -152,6 +153,15 @@ class _AgencySpaceScreenState extends State<AgencySpaceScreen> {
                       subtitle: '${s.activeAgents} actif(s) · ajouter, modifier, désactiver',
                       onTap: () => _open(AgentListScreen(
                           agencyId: s.agency.id!, agencyName: s.agency.name)),
+                    ),
+                    const Divider(height: 1, color: AppColors.background),
+                    // Module 5 (Ing. 3) — annonces de l'agence
+                    NavTile(
+                      icon: Icons.campaign_outlined,
+                      tone: toneGreen,
+                      title: 'Mes annonces',
+                      subtitle: 'Publier, suspendre, prolonger · vues et favoris',
+                      onTap: () => _open(ListingListScreen(agencyId: s.agency.id!)),
                     ),
                     const Divider(height: 1, color: AppColors.background),
                     NavTile(
