@@ -12,7 +12,7 @@ import 'package:immora_mobile/module_authentification/repositories/agent_perform
 import 'package:immora_mobile/module_gestion_annonces/models/app_notification.dart';
 import 'package:immora_mobile/module_gestion_annonces/repositories/listing_repository.dart';
 import 'package:immora_mobile/module_gestion_annonces/repositories/matching_repository.dart';
-import 'package:immora_mobile/module_gestion_annonces/repositories/visit_repository.dart';
+import 'package:immora_mobile/module_gestion_visites/repositories/visit_repository.dart';
 
 /// Module 6 : visites sur une vraie base SQLite (FFI), créée avec les
 /// données de démonstration : le client de démo a 9 visites (2 demandées,

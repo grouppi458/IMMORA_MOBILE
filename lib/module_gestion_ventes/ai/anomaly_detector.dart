@@ -8,7 +8,7 @@ import 'package:immora_mobile/core/utils/constants.dart';
 import 'package:immora_mobile/core/utils/enums.dart';
 import 'package:immora_mobile/core/utils/formatters.dart';
 
-/// Détecteur d'anomalies du Module 4 (bannière « lib/ai/anomaly_detector.dart »
+/// Détecteur d'anomalies du Module 4 (bannière « lib/module_gestion_ventes/ai/anomaly_detector.dart »
 /// de la maquette « Alertes ») : exécuté à chaque transaction ou paiement —
 /// - **montant inhabituel** : z-score > 2,5 face aux transactions de même type
 ///   de l'agence (historique minimal : [anomalyMinHistory]) → High ;

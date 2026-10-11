@@ -11,7 +11,7 @@ import 'package:immora_mobile/module_gestion_ventes/screens/alert_detail_screen.
 import 'package:immora_mobile/module_gestion_ventes/widgets/sales_widgets.dart';
 
 /// « Alertes » [alertList] — M4 : les anomalies détectées par
-/// `lib/ai/anomaly_detector.dart`, les plus graves d'abord, avec les
+/// `lib/module_gestion_ventes/ai/anomaly_detector.dart`, les plus graves d'abord, avec les
 /// compteurs « Toutes · N / Non lues · N ».
 class AlertListScreen extends StatefulWidget {
   const AlertListScreen({super.key, required this.agencyId});
@@ -69,7 +69,7 @@ class _AlertListScreenState extends State<AlertListScreen> {
               child: MessageBanner(
                 type: BannerType.info,
                 icon: Icons.shield_outlined,
-                title: 'lib/ai/anomaly_detector.dart',
+                title: 'lib/module_gestion_ventes/ai/anomaly_detector.dart',
                 message: 'Exécuté à chaque transaction ou paiement : z-score > 2,5 · '
                     'écart de prix > 30 % · > 5 transactions/24 h par agent · '
                     'retard · montant inattendu > 5 %.',

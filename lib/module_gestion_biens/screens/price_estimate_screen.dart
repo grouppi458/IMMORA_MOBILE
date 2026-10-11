@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:immora_mobile/ai/price_estimator.dart';
+import 'package:immora_mobile/module_gestion_biens/ai/price_estimator.dart';
 import 'package:immora_mobile/core/theme/app_colors.dart';
 import 'package:immora_mobile/core/utils/constants.dart';
 import 'package:immora_mobile/core/utils/enums.dart';
@@ -52,7 +52,7 @@ class _PriceEstimateScreenState extends State<PriceEstimateScreen> {
                 const MessageBanner(
                   type: BannerType.info,
                   icon: Icons.auto_awesome,
-                  title: 'lib/ai/price_estimator.dart',
+                  title: 'lib/module_gestion_biens/ai/price_estimator.dart',
                   message: 'Prix moyen au m² des biens comparables (même ville, '
                       'type et transaction ; statut sold ou available) × surface '
                       '× coefficients.',

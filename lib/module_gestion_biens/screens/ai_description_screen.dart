@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:immora_mobile/ai/description_generator.dart';
+import 'package:immora_mobile/module_gestion_biens/ai/description_generator.dart';
 import 'package:immora_mobile/core/theme/app_colors.dart';
 import 'package:immora_mobile/core/utils/enums.dart';
 import 'package:immora_mobile/core/widgets/admin_widgets.dart';
@@ -48,7 +48,7 @@ class _AiDescriptionScreenState extends State<AiDescriptionScreen> {
           const MessageBanner(
             type: BannerType.info,
             icon: Icons.auto_awesome,
-            title: 'lib/ai/description_generator.dart',
+            title: 'lib/module_gestion_biens/ai/description_generator.dart',
             message: 'Un modèle de phrase est rempli avec les champs du bien, '
                 'puis les équipements présents sont ajoutés.',
           ),

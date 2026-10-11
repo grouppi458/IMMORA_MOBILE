@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:immora_mobile/core/theme/app_colors.dart';
 import 'package:immora_mobile/core/utils/enums.dart';
 import 'package:immora_mobile/core/widgets/admin_widgets.dart';
-import 'package:immora_mobile/module_gestion_annonces/models/visit_details.dart';
+import 'package:immora_mobile/module_gestion_visites/models/visit_details.dart';
 
 /// Ligne d'une visite dans une liste (M6) : icône teintée selon le statut,
 /// titre court, sous-titre libre et badge de statut.

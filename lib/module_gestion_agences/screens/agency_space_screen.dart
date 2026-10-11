@@ -14,7 +14,7 @@ import 'package:immora_mobile/module_authentification/screens/login_screen.dart'
 import 'package:immora_mobile/module_gestion_agences/models/agency_views.dart';
 import 'package:immora_mobile/module_gestion_agences/providers/agency_provider.dart';
 import 'package:immora_mobile/module_gestion_annonces/screens/listing_list_screen.dart';
-import 'package:immora_mobile/module_gestion_annonces/screens/visit_calendar_screen.dart';
+import 'package:immora_mobile/module_gestion_visites/screens/visit_calendar_screen.dart';
 import 'package:immora_mobile/module_gestion_ventes/screens/finance_stats_screen.dart';
 
 /// Accueil du rôle « agence » (BF1.6) : son abonnement et ses limites (BF2.8),

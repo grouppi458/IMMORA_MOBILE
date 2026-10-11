@@ -6,7 +6,7 @@ import 'package:immora_mobile/module_authentification/providers/auth_provider.da
 import 'package:immora_mobile/module_gestion_annonces/providers/client_listing_provider.dart';
 import 'package:immora_mobile/module_gestion_annonces/screens/assistant_screen.dart';
 import 'package:immora_mobile/module_gestion_annonces/screens/client_home_screen.dart';
-import 'package:immora_mobile/module_gestion_annonces/screens/client_visits_screen.dart';
+import 'package:immora_mobile/module_gestion_visites/screens/client_visits_screen.dart';
 import 'package:immora_mobile/module_gestion_annonces/screens/favorites_screen.dart';
 import 'package:immora_mobile/module_gestion_annonces/screens/search_screen.dart';
 

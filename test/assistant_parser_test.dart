@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:immora_mobile/ai/assistant_parser.dart';
+import 'package:immora_mobile/module_gestion_annonces/ai/assistant_parser.dart';
 import 'package:immora_mobile/core/utils/enums.dart';
 import 'package:immora_mobile/module_gestion_annonces/models/listing.dart';
 import 'package:immora_mobile/module_gestion_annonces/models/listing_details.dart';

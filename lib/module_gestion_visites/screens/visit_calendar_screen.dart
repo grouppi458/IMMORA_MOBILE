@@ -7,10 +7,10 @@ import 'package:immora_mobile/core/utils/enums.dart';
 import 'package:immora_mobile/core/utils/formatters.dart';
 import 'package:immora_mobile/core/widgets/admin_widgets.dart';
 import 'package:immora_mobile/core/widgets/message_banner.dart';
-import 'package:immora_mobile/module_gestion_annonces/models/visit_details.dart';
-import 'package:immora_mobile/module_gestion_annonces/providers/visit_provider.dart';
-import 'package:immora_mobile/module_gestion_annonces/repositories/visit_repository.dart';
-import 'package:immora_mobile/module_gestion_annonces/screens/agent_visit_detail_screen.dart';
+import 'package:immora_mobile/module_gestion_visites/models/visit_details.dart';
+import 'package:immora_mobile/module_gestion_visites/providers/visit_provider.dart';
+import 'package:immora_mobile/module_gestion_visites/repositories/visit_repository.dart';
+import 'package:immora_mobile/module_gestion_visites/screens/agent_visit_detail_screen.dart';
 import 'package:immora_mobile/module_gestion_annonces/widgets/segmented_control.dart';
 
 /// « Calendrier des visites » (M6 · maquette Figma) — côté agence et agent :

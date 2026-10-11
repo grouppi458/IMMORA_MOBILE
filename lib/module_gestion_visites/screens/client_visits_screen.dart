@@ -8,12 +8,12 @@ import 'package:immora_mobile/core/widgets/admin_widgets.dart';
 import 'package:immora_mobile/core/widgets/message_banner.dart';
 import 'package:immora_mobile/core/widgets/primary_button.dart';
 import 'package:immora_mobile/module_authentification/providers/auth_provider.dart';
-import 'package:immora_mobile/module_gestion_annonces/models/visit_details.dart';
+import 'package:immora_mobile/module_gestion_visites/models/visit_details.dart';
 import 'package:immora_mobile/module_gestion_annonces/providers/matching_provider.dart';
-import 'package:immora_mobile/module_gestion_annonces/providers/visit_provider.dart';
-import 'package:immora_mobile/module_gestion_annonces/screens/visit_detail_screen.dart';
+import 'package:immora_mobile/module_gestion_visites/providers/visit_provider.dart';
+import 'package:immora_mobile/module_gestion_visites/screens/visit_detail_screen.dart';
 import 'package:immora_mobile/module_gestion_annonces/widgets/segmented_control.dart';
-import 'package:immora_mobile/module_gestion_annonces/widgets/visit_list_row.dart';
+import 'package:immora_mobile/module_gestion_visites/widgets/visit_list_row.dart';
 
 /// « Mes visites » (M6 · maquette Figma) — onglet du client : visites à venir
 /// (demandées ou confirmées) et passées (effectuées, absentes, annulées).

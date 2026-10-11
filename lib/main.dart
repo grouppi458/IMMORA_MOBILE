@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 
-import 'package:immora_mobile/core/notifications/visit_reminders.dart';
+import 'package:immora_mobile/module_gestion_visites/services/visit_reminders.dart';
 import 'package:immora_mobile/core/theme/app_theme.dart';
 import 'package:immora_mobile/module_authentification/providers/auth_provider.dart';
 import 'package:immora_mobile/module_authentification/providers/user_admin_provider.dart';
@@ -14,7 +14,7 @@ import 'package:immora_mobile/module_gestion_agences/providers/agency_provider.d
 import 'package:immora_mobile/module_gestion_annonces/providers/client_listing_provider.dart';
 import 'package:immora_mobile/module_gestion_annonces/providers/listing_provider.dart';
 import 'package:immora_mobile/module_gestion_annonces/providers/matching_provider.dart';
-import 'package:immora_mobile/module_gestion_annonces/providers/visit_provider.dart';
+import 'package:immora_mobile/module_gestion_visites/providers/visit_provider.dart';
 import 'package:immora_mobile/module_gestion_biens/providers/property_provider.dart';
 import 'package:immora_mobile/module_gestion_ventes/providers/alert_provider.dart';
 import 'package:immora_mobile/module_gestion_ventes/providers/transaction_provider.dart';

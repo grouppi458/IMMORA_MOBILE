@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:immora_mobile/core/utils/enums.dart';
 
 /// Alerte d'anomalie (table `alerts`, M4), produite par
-/// `lib/ai/anomaly_detector.dart` — maquettes « Alertes » et « Alerte ».
+/// `lib/module_gestion_ventes/ai/anomaly_detector.dart` — maquettes « Alertes » et « Alerte ».
 class Alert {
   final int? id;
   final int agencyId;

@@ -6,7 +6,7 @@ import 'package:timezone/timezone.dart' as timezone;
 
 import 'package:immora_mobile/core/utils/constants.dart';
 import 'package:immora_mobile/core/utils/formatters.dart';
-import 'package:immora_mobile/module_gestion_annonces/models/visit_details.dart';
+import 'package:immora_mobile/module_gestion_visites/models/visit_details.dart';
 
 /// Rappels locaux des visites : une notification « 24 h avant » programmée
 /// sur l'appareil (flutter_local_notifications + zonedSchedule).

@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 
 import 'package:immora_mobile/core/errors/app_exception.dart';
-import 'package:immora_mobile/core/notifications/visit_reminders.dart';
+import 'package:immora_mobile/module_gestion_visites/services/visit_reminders.dart';
 import 'package:immora_mobile/core/utils/enums.dart';
-import 'package:immora_mobile/module_gestion_annonces/models/visit_details.dart';
-import 'package:immora_mobile/module_gestion_annonces/repositories/visit_repository.dart';
+import 'package:immora_mobile/module_gestion_visites/models/visit_details.dart';
+import 'package:immora_mobile/module_gestion_visites/repositories/visit_repository.dart';
 
 /// État du Module 6 : demandes de visite du client (« Mes visites ») et,
 /// côté agence / agent, les visites à traiter (confirmer, reprogrammer,

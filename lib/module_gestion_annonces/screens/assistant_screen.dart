@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:immora_mobile/ai/assistant_parser.dart';
+import 'package:immora_mobile/module_gestion_annonces/ai/assistant_parser.dart';
 import 'package:immora_mobile/core/theme/app_colors.dart';
 import 'package:immora_mobile/core/utils/enums.dart';
 import 'package:immora_mobile/core/widgets/admin_widgets.dart';

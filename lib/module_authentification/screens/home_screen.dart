@@ -12,7 +12,7 @@ import 'package:immora_mobile/core/widgets/primary_button.dart';
 import 'package:immora_mobile/module_gestion_annonces/screens/client_shell.dart';
 import 'package:immora_mobile/module_gestion_annonces/screens/listing_list_screen.dart';
 import 'package:immora_mobile/module_gestion_annonces/screens/owner_shell.dart';
-import 'package:immora_mobile/module_gestion_annonces/screens/visit_calendar_screen.dart';
+import 'package:immora_mobile/module_gestion_visites/screens/visit_calendar_screen.dart';
 import 'package:immora_mobile/module_authentification/screens/login_screen.dart';
 
 /// BF1.6 — redirection vers l'accueil propre au rôle après connexion.

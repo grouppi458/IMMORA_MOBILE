@@ -1,5 +1,5 @@
 import 'package:immora_mobile/core/utils/enums.dart';
-import 'package:immora_mobile/module_gestion_annonces/models/visit.dart';
+import 'package:immora_mobile/module_gestion_visites/models/visit.dart';
 
 /// Visite avec les libellés à afficher (jointures visites ⋈ biens ⋈ annonces
 /// ⋈ agence ⋈ comptes). Construit par [VisitRepository].

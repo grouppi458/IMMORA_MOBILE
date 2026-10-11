@@ -130,7 +130,7 @@ enum PaymentMethod { cash, cheque, transfer, card }
 /// retard (échéance dépassée) ou en attente.
 enum PaymentStatus { pending, paid, late }
 
-/// Gravité d'une anomalie (`lib/ai/anomaly_detector.dart`) — badges
+/// Gravité d'une anomalie (`lib/module_gestion_ventes/ai/anomaly_detector.dart`) — badges
 /// « High »/« Medium »/« Low » de la maquette.
 enum AlertSeverity { low, medium, high }
 

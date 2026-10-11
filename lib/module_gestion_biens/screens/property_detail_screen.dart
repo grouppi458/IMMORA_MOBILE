@@ -4,8 +4,8 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 
-import 'package:immora_mobile/ai/description_generator.dart';
-import 'package:immora_mobile/ai/price_estimator.dart';
+import 'package:immora_mobile/module_gestion_biens/ai/description_generator.dart';
+import 'package:immora_mobile/module_gestion_biens/ai/price_estimator.dart';
 import 'package:immora_mobile/core/theme/app_colors.dart';
 import 'package:immora_mobile/core/utils/enums.dart';
 import 'package:immora_mobile/core/utils/formatters.dart';

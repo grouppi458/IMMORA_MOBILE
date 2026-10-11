@@ -7,8 +7,8 @@ import 'package:immora_mobile/core/utils/constants.dart';
 import 'package:immora_mobile/core/utils/enums.dart';
 import 'package:immora_mobile/core/utils/formatters.dart';
 import 'package:immora_mobile/module_gestion_annonces/models/app_notification.dart';
-import 'package:immora_mobile/module_gestion_annonces/models/visit.dart';
-import 'package:immora_mobile/module_gestion_annonces/models/visit_details.dart';
+import 'package:immora_mobile/module_gestion_visites/models/visit.dart';
+import 'package:immora_mobile/module_gestion_visites/models/visit_details.dart';
 
 /// Demandes de visite (Module 6). Les règles métier lèvent une
 /// [AdminException] affichée telle quelle.

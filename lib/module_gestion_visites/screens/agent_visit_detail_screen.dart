@@ -9,10 +9,10 @@ import 'package:immora_mobile/core/utils/formatters.dart';
 import 'package:immora_mobile/core/widgets/admin_widgets.dart';
 import 'package:immora_mobile/core/widgets/message_banner.dart';
 import 'package:immora_mobile/core/widgets/primary_button.dart';
-import 'package:immora_mobile/module_gestion_annonces/models/visit_details.dart';
-import 'package:immora_mobile/module_gestion_annonces/providers/visit_provider.dart';
-import 'package:immora_mobile/module_gestion_annonces/widgets/visit_hero.dart';
-import 'package:immora_mobile/module_gestion_annonces/widgets/visit_slot_picker.dart';
+import 'package:immora_mobile/module_gestion_visites/models/visit_details.dart';
+import 'package:immora_mobile/module_gestion_visites/providers/visit_provider.dart';
+import 'package:immora_mobile/module_gestion_visites/widgets/visit_hero.dart';
+import 'package:immora_mobile/module_gestion_visites/widgets/visit_slot_picker.dart';
 import 'package:immora_mobile/module_gestion_ventes/screens/transaction_form_screen.dart';
 
 /// « Visite #… » côté agent (M6 · maquette Figma) : coordonnées du client,

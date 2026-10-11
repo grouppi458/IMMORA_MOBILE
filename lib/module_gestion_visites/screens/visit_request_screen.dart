@@ -9,7 +9,7 @@ import 'package:immora_mobile/core/widgets/admin_widgets.dart';
 import 'package:immora_mobile/core/widgets/primary_button.dart';
 import 'package:immora_mobile/module_authentification/providers/auth_provider.dart';
 import 'package:immora_mobile/module_gestion_annonces/models/listing_details.dart';
-import 'package:immora_mobile/module_gestion_annonces/providers/visit_provider.dart';
+import 'package:immora_mobile/module_gestion_visites/providers/visit_provider.dart';
 import 'package:immora_mobile/module_gestion_annonces/screens/client_shell.dart';
 import 'package:immora_mobile/module_gestion_annonces/widgets/client_listing_cards.dart';
 import 'package:immora_mobile/module_gestion_annonces/widgets/listing_card.dart';

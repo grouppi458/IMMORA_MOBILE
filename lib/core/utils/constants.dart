@@ -37,7 +37,7 @@ const int listingTitleMinLength = 5;
 const int listingTitleMaxLength = 80;
 
 // Biens (M3) : limites du formulaire (BF3.1), photos (BF3.2) et paramètres
-// de l'estimation du prix (BF3.6–BF3.8, `lib/ai/price_estimator.dart`).
+// de l'estimation du prix (BF3.6–BF3.8, `lib/module_gestion_biens/ai/price_estimator.dart`).
 const int propertyTitleMinLength = 5;
 const int propertyTitleMaxLength = 80;
 const int propertyDescriptionMaxLength = 500;
@@ -81,7 +81,7 @@ const int visitRatingMax = 5;
 // Délai du rappel local avant la visite (heures).
 const int visitReminderHours = 24;
 
-// Ventes (M4) : seuils du détecteur d'anomalies (`lib/ai/anomaly_detector.dart`),
+// Ventes (M4) : seuils du détecteur d'anomalies (`lib/module_gestion_ventes/ai/anomaly_detector.dart`),
 // repris dans la bannière de l'écran « Alertes ».
 const double anomalyZScoreThreshold = 2.5; // montant inhabituel (z-score)
 const double anomalyPriceGapPercent = 30; // écart prix affiché / estimation

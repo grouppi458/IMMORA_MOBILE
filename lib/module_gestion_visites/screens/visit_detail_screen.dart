@@ -8,13 +8,13 @@ import 'package:immora_mobile/core/utils/formatters.dart';
 import 'package:immora_mobile/core/widgets/admin_widgets.dart';
 import 'package:immora_mobile/core/widgets/message_banner.dart';
 import 'package:immora_mobile/core/widgets/primary_button.dart';
-import 'package:immora_mobile/module_gestion_annonces/models/visit.dart';
-import 'package:immora_mobile/module_gestion_annonces/models/visit_details.dart';
-import 'package:immora_mobile/module_gestion_annonces/providers/visit_provider.dart';
+import 'package:immora_mobile/module_gestion_visites/models/visit.dart';
+import 'package:immora_mobile/module_gestion_visites/models/visit_details.dart';
+import 'package:immora_mobile/module_gestion_visites/providers/visit_provider.dart';
 import 'package:immora_mobile/module_gestion_annonces/screens/listing_detail_screen.dart';
-import 'package:immora_mobile/module_gestion_annonces/screens/visit_done_screen.dart';
+import 'package:immora_mobile/module_gestion_visites/screens/visit_done_screen.dart';
 import 'package:immora_mobile/module_gestion_annonces/widgets/listing_map.dart';
-import 'package:immora_mobile/module_gestion_annonces/widgets/visit_hero.dart';
+import 'package:immora_mobile/module_gestion_visites/widgets/visit_hero.dart';
 
 /// « Visite » côté client (M6 · maquette Figma) : suivi chronologique,
 /// informations pratiques, carte et actions (annuler, noter, voir le bien).

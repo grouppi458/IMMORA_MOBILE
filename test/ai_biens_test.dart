@@ -4,8 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
-import 'package:immora_mobile/ai/description_generator.dart';
-import 'package:immora_mobile/ai/price_estimator.dart';
+import 'package:immora_mobile/module_gestion_biens/ai/description_generator.dart';
+import 'package:immora_mobile/module_gestion_biens/ai/price_estimator.dart';
 import 'package:immora_mobile/core/database/database_helper.dart';
 import 'package:immora_mobile/core/utils/constants.dart';
 import 'package:immora_mobile/core/utils/enums.dart';

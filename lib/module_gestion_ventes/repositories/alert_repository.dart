@@ -1,6 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 
-import 'package:immora_mobile/ai/anomaly_detector.dart';
+import 'package:immora_mobile/module_gestion_ventes/ai/anomaly_detector.dart';
 import 'package:immora_mobile/core/database/database_helper.dart';
 import 'package:immora_mobile/core/utils/enums.dart';
 import 'package:immora_mobile/module_gestion_ventes/models/alert.dart';

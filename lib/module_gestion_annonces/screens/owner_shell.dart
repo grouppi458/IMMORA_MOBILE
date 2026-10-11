@@ -8,7 +8,7 @@ import 'package:immora_mobile/core/widgets/admin_widgets.dart';
 import 'package:immora_mobile/core/widgets/primary_button.dart';
 import 'package:immora_mobile/module_authentification/providers/auth_provider.dart';
 import 'package:immora_mobile/module_authentification/screens/login_screen.dart';
-import 'package:immora_mobile/module_gestion_annonces/screens/owner_visits_screen.dart';
+import 'package:immora_mobile/module_gestion_visites/screens/owner_visits_screen.dart';
 import 'package:immora_mobile/module_gestion_biens/screens/owner_home_screen.dart';
 import 'package:immora_mobile/module_gestion_biens/screens/owner_properties_screen.dart';
 
