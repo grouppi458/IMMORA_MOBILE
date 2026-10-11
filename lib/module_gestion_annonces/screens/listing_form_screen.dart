@@ -91,6 +91,7 @@ class _ListingFormScreenState extends State<ListingFormScreen> {
     }
     FocusScope.of(context).unfocus();
     final price = double.parse(_priceCtrl.text);
+    final userId = context.read<AuthProvider>().currentUser?.id;
     final ok = _isEdit
         ? await _provider.updateContent(widget.details!.listing.id!,
             title: _titleCtrl.text,
@@ -100,7 +101,7 @@ class _ListingFormScreenState extends State<ListingFormScreen> {
         : await _provider.create(
             propertyId: _property!.id!,
             agencyId: widget.agencyId,
-            createdBy: context.read<AuthProvider>().currentUser?.id,
+            createdBy: userId,
             title: _titleCtrl.text,
             text: _textCtrl.text,
             displayedPrice: price,

@@ -273,9 +273,9 @@ class _TransactionFormScreenState extends State<TransactionFormScreen> {
   }
 
   Future<void> _pickContract() async {
-    final files = await FilePicker.pickFiles(
+    final result = await FilePicker.pickFiles(
         type: FileType.custom, allowedExtensions: ['pdf']);
-    final name = files.isEmpty ? null : files.first.name;
+    final name = result?.files.firstOrNull?.name;
     if (name != null && mounted) setState(() => _contractName = name);
   }
 
