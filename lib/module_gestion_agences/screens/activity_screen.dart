@@ -95,9 +95,9 @@ class _ScoreCard extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               Text(
-                '${act.loginsLast30Days} connexions · '
-                '${act.propertiesAddedLast30Days} biens · '
-                '${act.clientsAddedLast30Days} clients · '
+                '${act.loginsLast30Days} connexion${act.loginsLast30Days > 1 ? 's' : ''} · '
+                '${act.propertiesAddedLast30Days} bien${act.propertiesAddedLast30Days > 1 ? 's' : ''} · '
+                '${act.clientsAddedLast30Days} client${act.clientsAddedLast30Days > 1 ? 's' : ''} · '
                 '${days == null ? 'aucune activité' : days == 0 ? 'actif aujourd’hui' : 'inactif depuis $days j'}',
                 style: const TextStyle(color: AppColors.textMuted, fontSize: 12),
               ),

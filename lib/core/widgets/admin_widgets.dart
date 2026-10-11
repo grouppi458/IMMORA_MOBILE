@@ -338,7 +338,7 @@ class RevenueBarChart extends StatelessWidget {
                         Tooltip(
                           message: '${formatNumber(months[i].amount)} TND',
                           child: Container(
-                            height: max == 0 ? 2 : (months[i].amount / max) * height + 2,
+                            height: max == 0 ? 2 : (months[i].amount / max) * (height - 2) + 2,
                             decoration: BoxDecoration(
                               color: i == months.length - 1 ? AppColors.gold : AppColors.primary,
                               borderRadius: const BorderRadius.vertical(top: Radius.circular(4)),
