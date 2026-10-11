@@ -49,15 +49,6 @@ class _PriceEstimateScreenState extends State<PriceEstimateScreen> {
           : ListView(
               padding: const EdgeInsets.all(16),
               children: [
-                const MessageBanner(
-                  type: BannerType.info,
-                  icon: Icons.auto_awesome,
-                  title: 'lib/module_gestion_biens/ai/price_estimator.dart',
-                  message: 'Prix moyen au m² des biens comparables (même ville, '
-                      'type et transaction ; statut sold ou available) × surface '
-                      '× coefficients.',
-                ),
-                const SizedBox(height: 14),
                 _HeaderCard(estimate: estimate),
                 if (widget.currentPrice != null) ...[
                   const SizedBox(height: 14),

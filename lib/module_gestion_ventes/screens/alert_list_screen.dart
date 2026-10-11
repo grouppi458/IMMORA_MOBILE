@@ -64,18 +64,6 @@ class _AlertListScreenState extends State<AlertListScreen> {
         child: ListView(
           padding: const EdgeInsets.only(top: 16, bottom: 24),
           children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: MessageBanner(
-                type: BannerType.info,
-                icon: Icons.shield_outlined,
-                title: 'lib/module_gestion_ventes/ai/anomaly_detector.dart',
-                message: 'Exécuté à chaque transaction ou paiement : z-score > 2,5 · '
-                    'écart de prix > 30 % · > 5 transactions/24 h par agent · '
-                    'retard · montant inattendu > 5 %.',
-              ),
-            ),
-            const SizedBox(height: 12),
             FilterChipsRow<(AlertSeverity?, bool)>(
               selected: (provider.severityFilter, provider.unreadOnly),
               onSelected: (f) =>

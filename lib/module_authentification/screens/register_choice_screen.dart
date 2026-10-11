@@ -10,7 +10,7 @@ enum AccountRole {
   agence(UserRole.agency, 'Une agence immobilière', 'Gérer biens, agents & transactions',
       'Compte agence', Icons.groups_outlined, AppColors.infoBg, AppColors.primary),
   client(UserRole.client, 'Un client', 'Rechercher un bien à acheter / louer',
-      'Compte client', Icons.person_outline, Color(0xFFF6ECD6), AppColors.gold),
+      'Compte client', Icons.person_outline, Color(0xFFF7E8C9), AppColors.gold),
   proprietaire(UserRole.owner, 'Un propriétaire', 'Suivre mes biens et leurs visites',
       'Compte propriétaire', Icons.vpn_key_outlined, AppColors.infoBg,
       AppColors.primary);

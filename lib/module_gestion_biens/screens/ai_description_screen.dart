@@ -4,7 +4,6 @@ import 'package:immora_mobile/module_gestion_biens/ai/description_generator.dart
 import 'package:immora_mobile/core/theme/app_colors.dart';
 import 'package:immora_mobile/core/utils/enums.dart';
 import 'package:immora_mobile/core/widgets/admin_widgets.dart';
-import 'package:immora_mobile/core/widgets/message_banner.dart';
 import 'package:immora_mobile/module_gestion_biens/models/property.dart';
 
 /// BF3.8 — « Description IA » [aiDescription] : le modèle de phrase est rempli
@@ -45,14 +44,6 @@ class _AiDescriptionScreenState extends State<AiDescriptionScreen> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          const MessageBanner(
-            type: BannerType.info,
-            icon: Icons.auto_awesome,
-            title: 'lib/module_gestion_biens/ai/description_generator.dart',
-            message: 'Un modèle de phrase est rempli avec les champs du bien, '
-                'puis les équipements présents sont ajoutés.',
-          ),
-          const SizedBox(height: 20),
           SectionTitle('Modèle (${p.dealType.label.toLowerCase()})'),
           const SizedBox(height: 8),
           WhiteCard(

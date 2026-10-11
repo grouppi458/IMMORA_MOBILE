@@ -41,7 +41,7 @@ typedef Tone = (Color bg, Color fg);
 const Tone toneBlue = (AppColors.infoBg, AppColors.primary);
 const Tone toneGreen = (AppColors.successBg, AppColors.success);
 const Tone toneRed = (AppColors.errorBg, AppColors.error);
-const Tone toneGold = (Color(0xFFF6ECD6), AppColors.gold);
+const Tone toneGold = (Color(0xFFF7E8C9), AppColors.gold);
 const Tone toneGrey = (Color(0xFFE6E8EC), Color(0xFF4B5563));
 const Tone toneAgent = (Color(0xFFE3ECFB), Color(0xFF2F5FB3));
 

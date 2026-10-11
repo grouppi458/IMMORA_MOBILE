@@ -11,15 +11,15 @@ class AppColors {
   static const background = Color(0xFFF2F2F2); // gris clair
 
   static const white = Colors.white;
-  static const textDark = Color(0xFF1E1E1E);
-  static const textMuted = Color(0xFF6B7280);
-  static const border = Color(0xFFD9DDE3);
+  static const textDark = Color(0xFF1A1C1E);
+  static const textMuted = Color(0xFF74777F);
+  static const border = Color(0xFFE2E4EA);
 
-  static const error = Color(0xFFC62828);
-  static const errorBg = Color(0xFFFBE3E3);
+  static const error = Color(0xFFB3261E);
+  static const errorBg = Color(0xFFF9DEDC);
   static const success = Color(0xFF2E7D32);
-  static const successBg = Color(0xFFE3F4E4);
-  static const infoBg = Color(0xFFDDE7F5);
-  static const warning = Color(0xFF8A6410);
-  static const warningBg = Color(0xFFF6ECD6);
+  static const successBg = Color(0xFFD7F0D8);
+  static const infoBg = Color(0xFFD7E6FB);
+  static const warning = Color(0xFFA86A00);
+  static const warningBg = Color(0xFFFFE9C2);
 }
