@@ -9,7 +9,7 @@ import 'package:immora_mobile/core/utils/constants.dart';
 import 'package:immora_mobile/core/utils/enums.dart';
 import 'package:immora_mobile/module_gestion_annonces/models/listing.dart';
 import 'package:immora_mobile/module_gestion_annonces/models/listing_details.dart';
-import 'package:immora_mobile/module_gestion_annonces/models/property.dart';
+import 'package:immora_mobile/module_gestion_biens/models/property.dart';
 import 'package:immora_mobile/module_gestion_annonces/repositories/matching_repository.dart';
 
 /// Gestion des annonces (Module 5, BF5.1, BF5.3 à BF5.5).

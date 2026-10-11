@@ -146,6 +146,69 @@ class _PriceTag extends StatelessWidget {
   }
 }
 
+/// Localisation du bien d'une visite (maquette « Visite ») : carte fixe avec
+/// un repère or, à partir des seules coordonnées.
+class VisitLocationMap extends StatelessWidget {
+  const VisitLocationMap({
+    super.key,
+    required this.latitude,
+    required this.longitude,
+    this.label = '',
+    this.height = 130,
+  });
+
+  final double? latitude;
+  final double? longitude;
+  final String label;
+  final double height;
+
+  @override
+  Widget build(BuildContext context) {
+    final point =
+        latitude == null || longitude == null ? null : LatLng(latitude!, longitude!);
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(14),
+      child: SizedBox(
+        height: height,
+        child: Stack(children: [
+          FlutterMap(
+            options: MapOptions(
+              initialCenter: point ?? _tunis,
+              initialZoom: point == null ? 11 : 14,
+              backgroundColor: const Color(0xFFE6ECE3),
+              interactionOptions: const InteractionOptions(flags: InteractiveFlag.none),
+            ),
+            children: [
+              _osmTiles(),
+              if (point != null)
+                MarkerLayer(markers: [
+                  Marker(
+                    point: point,
+                    width: 40,
+                    height: 40,
+                    alignment: Alignment.topCenter,
+                    child: const Icon(Icons.location_on, color: AppColors.gold, size: 38),
+                  ),
+                ]),
+            ],
+          ),
+          if (label.isNotEmpty)
+            Positioned(
+              left: 10,
+              bottom: 10,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration:
+                    BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
+                child: Text(label, style: const TextStyle(fontSize: 12)),
+              ),
+            ),
+        ]),
+      ),
+    );
+  }
+}
+
 /// Localisation du bien sur la fiche [propPublic] (carte fixe, un repère).
 class LocationMap extends StatelessWidget {
   const LocationMap({super.key, required this.details, this.height = 130});

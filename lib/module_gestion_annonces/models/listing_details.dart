@@ -1,5 +1,5 @@
 import 'package:immora_mobile/module_gestion_annonces/models/listing.dart';
-import 'package:immora_mobile/module_gestion_annonces/models/property.dart';
+import 'package:immora_mobile/module_gestion_biens/models/property.dart';
 
 /// Annonce prête à afficher : l'annonce, son bien, son agence et le nombre
 /// de favoris (BF5.3).

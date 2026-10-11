@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import 'package:immora_mobile/ai/description_generator.dart';
 import 'package:immora_mobile/core/theme/app_colors.dart';
 import 'package:immora_mobile/core/utils/constants.dart';
 import 'package:immora_mobile/core/utils/enums.dart';
@@ -12,7 +13,7 @@ import 'package:immora_mobile/core/widgets/message_banner.dart';
 import 'package:immora_mobile/core/widgets/primary_button.dart';
 import 'package:immora_mobile/module_authentification/providers/auth_provider.dart';
 import 'package:immora_mobile/module_gestion_annonces/models/listing_details.dart';
-import 'package:immora_mobile/module_gestion_annonces/models/property.dart';
+import 'package:immora_mobile/module_gestion_biens/models/property.dart';
 import 'package:immora_mobile/module_gestion_annonces/providers/listing_provider.dart';
 
 /// « Créer / modifier annonce » [listingForm] — BF5.1 (création à partir d'un
@@ -79,7 +80,7 @@ class _ListingFormScreenState extends State<ListingFormScreen> {
           .showSnackBar(const SnackBar(content: Text('Choisissez d’abord le bien concerné.')));
       return;
     }
-    setState(() => _textCtrl.text = _draftDescription(p));
+    setState(() => _textCtrl.text = DescriptionGenerator.generate(p));
   }
 
   Future<void> _submit() async {
@@ -409,26 +410,3 @@ class _Toggle extends StatelessWidget {
   }
 }
 
-/// PROVISOIRE — texte d'annonce construit à partir des caractéristiques du
-/// bien, en attendant le générateur de description du Module 3 (BF3.8).
-String _draftDescription(Property p) {
-  final deal = p.dealType == DealType.rent ? 'à louer' : 'à vendre';
-  final rooms = p.rooms > 0 ? ', ${p.rooms} chambre${p.rooms > 1 ? 's' : ''}' : '';
-  final baths = p.type == PropertyType.land
-      ? ''
-      : ' et ${p.bathrooms} salle${p.bathrooms > 1 ? 's' : ''} de bain';
-  const amenityLabels = {
-    'parking': 'un parking',
-    'piscine': 'une piscine',
-    'jardin': 'un jardin',
-    'ascenseur': 'un ascenseur',
-  };
-  final amenities = p.amenities.map((a) => amenityLabels[a] ?? a).toList();
-  final extras = amenities.isEmpty
-      ? ''
-      : ' Le bien dispose de ${amenities.length == 1 ? amenities.first : '${amenities.sublist(0, amenities.length - 1).join(', ')} et ${amenities.last}'}.';
-  final located =
-      p.type == PropertyType.villa || p.type == PropertyType.house ? 'située' : 'situé';
-  return '${p.type.label} $deal de ${p.surface.round()} m² $located ${p.district.isEmpty ? 'à ${p.city}' : 'à ${p.district}, ${p.city}'}'
-      '$rooms$baths.$extras Contactez notre agence pour organiser une visite.';
-}

@@ -108,6 +108,15 @@ class MatchingProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Après une visite effectuée (M6) : recharge les biens visités pour que
+  /// « Pour vous » (BF5.8) l'exclue sans attendre la prochaine ouverture.
+  Future<void> refreshVisited() async {
+    final id = _clientId;
+    if (id == null) return;
+    _visited = await _repo.visitedPropertyIds(id);
+    notifyListeners();
+  }
+
   // ---------------------------------------------------------------- Profil
 
   ProfileSource get profileSource {
@@ -136,6 +145,14 @@ class MatchingProvider extends ChangeNotifier {
     final candidates =
         _client.published.where((d) => !_visited.contains(d.property.id)).toList();
     return MatchingEngine.rank(candidates, p).take(MatchingEngine.recommendationsCount).toList();
+  }
+
+  /// Assistant (M6) — classe les annonces publiées non visitées avec des
+  /// critères choisis à la volée, les plus compatibles d'abord.
+  List<ScoredListing> rankFor(SearchCriteria c, {int max = 5}) {
+    final candidates =
+        _client.published.where((d) => !_visited.contains(d.property.id)).toList();
+    return MatchingEngine.rank(candidates, c).take(max).toList();
   }
 
   /// BF5.6 — enregistre les critères (« Mes critères », ou la recherche en cours).

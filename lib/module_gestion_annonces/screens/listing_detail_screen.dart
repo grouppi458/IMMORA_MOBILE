@@ -9,6 +9,7 @@ import 'package:immora_mobile/core/widgets/message_banner.dart';
 import 'package:immora_mobile/module_gestion_annonces/models/listing_details.dart';
 import 'package:immora_mobile/module_gestion_annonces/providers/client_listing_provider.dart';
 import 'package:immora_mobile/module_gestion_annonces/providers/matching_provider.dart';
+import 'package:immora_mobile/module_gestion_annonces/screens/visit_request_screen.dart';
 import 'package:immora_mobile/module_gestion_annonces/widgets/client_listing_cards.dart';
 import 'package:immora_mobile/module_gestion_annonces/widgets/listing_card.dart';
 import 'package:immora_mobile/module_gestion_annonces/widgets/listing_map.dart';
@@ -42,10 +43,9 @@ class _ListingDetailScreenState extends State<ListingDetailScreen> {
     ));
   }
 
-  void _requestVisit() {
-    // Module 6 (visites) : le formulaire « Demander une visite » arrive avec le M6.
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('La demande de visite sera disponible avec le module Visites.')));
+  void _requestVisit(ListingDetails d) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (_) => VisitRequestScreen(details: d)));
   }
 
   void _showContact(ListingDetails d) {
@@ -104,7 +104,7 @@ class _ListingDetailScreenState extends State<ListingDetailScreen> {
             canFavorite: online || isFavorite,
             canVisit: online,
             onFavorite: _toggleFavorite,
-            onVisit: _requestVisit,
+            onVisit: () => _requestVisit(d),
           ),
           body: CustomScrollView(slivers: [
             SliverAppBar(

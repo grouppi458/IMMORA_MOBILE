@@ -21,6 +21,7 @@ IconData iconForPropertyType(PropertyType t) => switch (t) {
       PropertyType.house || PropertyType.villa => Icons.home_outlined,
       PropertyType.office => Icons.business_outlined,
       PropertyType.land => Icons.landscape_outlined,
+      PropertyType.shop => Icons.storefront_outlined,
     };
 
 /// « 485 000 TND » ou « 1 800 TND /mois » (prix en or, Price/15 du design system).

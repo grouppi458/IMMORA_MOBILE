@@ -1,6 +1,6 @@
 import 'package:immora_mobile/core/utils/enums.dart';
 import 'package:immora_mobile/module_gestion_annonces/models/listing_details.dart';
-import 'package:immora_mobile/module_gestion_annonces/models/property.dart';
+import 'package:immora_mobile/module_gestion_biens/models/property.dart';
 import 'package:immora_mobile/module_gestion_annonces/models/search_criteria.dart';
 
 /// Les cinq composantes du score, avec leur poids (cahier des charges, M5).

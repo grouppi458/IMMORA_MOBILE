@@ -3,9 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:immora_mobile/core/errors/app_exception.dart';
 import 'package:immora_mobile/core/utils/enums.dart';
 import 'package:immora_mobile/module_gestion_annonces/models/listing_details.dart';
-import 'package:immora_mobile/module_gestion_annonces/models/property.dart';
+import 'package:immora_mobile/module_gestion_biens/models/property.dart';
 import 'package:immora_mobile/module_gestion_annonces/repositories/listing_repository.dart';
-import 'package:immora_mobile/module_gestion_annonces/repositories/property_repository.dart';
+import 'package:immora_mobile/module_gestion_biens/repositories/property_repository.dart';
 
 /// État du Module 5 côté agence / agent : les annonces de l'agence connectée
 /// et leurs actions (BF5.1, BF5.3 à BF5.5).

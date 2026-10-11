@@ -303,11 +303,14 @@ class GoldFab extends StatelessWidget {
 }
 
 /// Histogramme des revenus des 6 derniers mois (dernier mois en or).
+/// [showValues] affiche le montant compact au-dessus de chaque barre
+/// (maquette « Finances » du M4 : « 18K », « 31K »…).
 class RevenueBarChart extends StatelessWidget {
-  const RevenueBarChart({super.key, required this.months, this.height = 120});
+  const RevenueBarChart({super.key, required this.months, this.height = 120, this.showValues = false});
 
   final List<MonthRevenue> months;
   final double height;
+  final bool showValues;
 
   @override
   Widget build(BuildContext context) {
@@ -315,7 +318,7 @@ class RevenueBarChart extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          height: height,
+          height: showValues ? height + 20 : height,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -323,15 +326,26 @@ class RevenueBarChart extends StatelessWidget {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 6),
-                    child: Tooltip(
-                      message: '${formatNumber(months[i].amount)} TND',
-                      child: Container(
-                        height: max == 0 ? 2 : (months[i].amount / max) * height + 2,
-                        decoration: BoxDecoration(
-                          color: i == months.length - 1 ? AppColors.gold : AppColors.primary,
-                          borderRadius: const BorderRadius.vertical(top: Radius.circular(4)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        if (showValues) ...[
+                          Text(compactMoney(months[i].amount),
+                              style: const TextStyle(
+                                  fontSize: 11, fontWeight: FontWeight.w600)),
+                          const SizedBox(height: 3),
+                        ],
+                        Tooltip(
+                          message: '${formatNumber(months[i].amount)} TND',
+                          child: Container(
+                            height: max == 0 ? 2 : (months[i].amount / max) * height + 2,
+                            decoration: BoxDecoration(
+                              color: i == months.length - 1 ? AppColors.gold : AppColors.primary,
+                              borderRadius: const BorderRadius.vertical(top: Radius.circular(4)),
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
                 ),
@@ -468,25 +482,39 @@ Future<void> showTemporaryPasswordDialog(
 
 /// Ligne « libellé ……… valeur » d'une fiche.
 class InfoRow extends StatelessWidget {
-  const InfoRow(this.label, this.value, {super.key});
+  const InfoRow(this.label, this.value,
+      {super.key, this.valueColor, this.onTap, this.valueIcon});
 
   final String label;
   final String value;
 
+  /// Couleur de la valeur (commission en or, contrat en bleu marine…).
+  final Color? valueColor;
+  final VoidCallback? onTap;
+  final IconData? valueIcon;
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-      child: Row(
-        children: [
-          Text(label, style: const TextStyle(color: AppColors.textMuted, fontSize: 13)),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(value,
-                textAlign: TextAlign.right,
-                style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
-          ),
-        ],
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        child: Row(
+          children: [
+            Text(label, style: const TextStyle(color: AppColors.textMuted, fontSize: 13)),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(value,
+                  textAlign: TextAlign.right,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w600, fontSize: 13, color: valueColor)),
+            ),
+            if (valueIcon != null) ...[
+              const SizedBox(width: 6),
+              Icon(valueIcon, size: 14, color: valueColor ?? AppColors.textMuted),
+            ],
+          ],
+        ),
       ),
     );
   }

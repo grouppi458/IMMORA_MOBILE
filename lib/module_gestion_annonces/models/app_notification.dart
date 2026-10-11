@@ -1,6 +1,6 @@
 /// Notification affichée dans l'application (table `notifications`).
-/// Le M5 crée les « nouvelle annonce pour vous » (BF5.9) ; le M6 pourra y
-/// ajouter ses rappels et confirmations de visite.
+/// Le M5 crée les « nouvelle annonce pour vous » (BF5.9) ; le M6 ajoute les
+/// confirmations, annulations et comptes rendus de visite.
 class AppNotification {
   final int? id;
   final int userId;
@@ -13,6 +13,12 @@ class AppNotification {
   final int createdAt;
 
   static const newListing = 'newListing';
+
+  // Module 6 — visites (le client est destinataire).
+  static const visitConfirmed = 'visitConfirmed';
+  static const visitCancelled = 'visitCancelled';
+  static const visitDone = 'visitDone';
+  static const visitAbsent = 'visitAbsent'; // no-show
 
   AppNotification({
     this.id,

@@ -46,7 +46,11 @@ class DemoDataAnnonces {
       Future<int> property(int agencyId, int? agentId, String title, PropertyType type,
           DealType deal, double price, double surface, int rooms, String city,
           String district, double lat, double lng, List<String> amenities,
-          {PropertyStatus status = PropertyStatus.available, int createdDaysAgo = 60}) {
+          {PropertyStatus status = PropertyStatus.available,
+          PropertyCondition condition = PropertyCondition.good,
+          int? floor,
+          double? landSurface,
+          int createdDaysAgo = 60}) {
         return txn.insert('properties', {
           'agencyId': agencyId,
           'ownerId': owner,
@@ -56,13 +60,16 @@ class DemoDataAnnonces {
           'dealType': deal.name,
           'price': price,
           'surface': surface,
+          'landSurface': landSurface,
           'rooms': rooms,
           'bathrooms': rooms >= 3 ? 2 : 1,
+          'floor': floor,
           'city': city,
           'district': district,
           'latitude': lat,
           'longitude': lng,
           'amenities': amenities.join(','),
+          'condition': condition.name,
           'status': status.name,
           'createdAt': ago(createdDaysAgo),
         });
@@ -94,32 +101,33 @@ class DemoDataAnnonces {
       // ---------- Carthage Immobilier ----------
       final lac = await property(carthage, agent(0), 'Appartement S+2 aux Berges du Lac 2',
           PropertyType.apartment, DealType.sale, 420000, 115, 2, 'Tunis',
-          'Les Berges du Lac 2', 36.8455, 10.2731, ['parking', 'ascenseur']);
+          'Les Berges du Lac 2', 36.8455, 10.2731, ['parking', 'ascenseur'], floor: 4);
       final marsa = await property(carthage, agent(2), 'Villa avec piscine à La Marsa',
           PropertyType.villa, DealType.sale, 1450000, 380, 5, 'La Marsa', 'Sidi Abdelaziz',
-          36.8890, 10.3240, ['parking', 'piscine', 'jardin']);
+          36.8890, 10.3240, ['parking', 'piscine', 'jardin'], landSurface: 600);
       final ennasr = await property(carthage, agent(1), 'Appartement S+1 à Ennasr',
           PropertyType.apartment, DealType.rent, 1100, 75, 1, 'Ariana', 'Ennasr 2',
-          36.8600, 10.1640, ['ascenseur']);
+          36.8600, 10.1640, ['ascenseur'], floor: 2);
       final menzah = await property(carthage, agent(0), 'Maison familiale à El Menzah 6',
           PropertyType.house, DealType.sale, 690000, 220, 4, 'Tunis', 'El Menzah 6',
-          36.8460, 10.1780, ['parking', 'jardin']);
+          36.8460, 10.1780, ['parking', 'jardin'], landSurface: 300);
       final carthageFlat = await property(carthage, agent(3), 'Appartement meublé à Carthage',
           PropertyType.apartment, DealType.rent, 2300, 130, 3, 'Carthage', 'Dermech',
-          36.8530, 10.3300, ['parking', 'ascenseur']);
-      final office = await property(carthage, agent(1), 'Bureau au Centre Urbain Nord',
-          PropertyType.office, DealType.rent, 3200, 160, 0, 'Tunis', 'Centre Urbain Nord',
-          36.8470, 10.1960, ['parking', 'ascenseur']);
+          36.8530, 10.3300, ['parking', 'ascenseur'], floor: 3);
+      final office = await property(carthage, agent(1), 'Bureau · Centre Urbain Nord',
+          PropertyType.office, DealType.sale, 320000, 110, 0, 'Tunis', 'Centre Urbain Nord',
+          36.8470, 10.1960, ['parking', 'ascenseur'], floor: 3);
       final soukra = await property(carthage, agent(0), 'Terrain constructible à La Soukra',
           PropertyType.land, DealType.sale, 380000, 500, 0, 'Ariana', 'La Soukra',
-          36.8750, 10.2400, []);
+          36.8750, 10.2400, [], landSurface: 500);
       final aouina = await property(carthage, agent(2), 'Appartement S+3 à L’Aouina',
           PropertyType.apartment, DealType.sale, 510000, 150, 3, 'Tunis', 'L’Aouina',
-          36.8520, 10.2550, ['parking', 'ascenseur'], status: PropertyStatus.sold);
+          36.8520, 10.2550, ['parking', 'ascenseur'], status: PropertyStatus.sold, floor: 5);
       // Bien disponible sans annonce : pour essayer « Créer une annonce » (BF5.1).
       await property(carthage, agent(1), 'Appartement S+2 à El Manar 2',
           PropertyType.apartment, DealType.rent, 1400, 100, 2, 'Tunis', 'El Manar 2',
-          36.8400, 10.1550, ['ascenseur'], createdDaysAgo: 4);
+          36.8400, 10.1550, ['ascenseur'],
+          condition: PropertyCondition.toRenovate, floor: 3, createdDaysAgo: 4);
 
       final lacListing = await listing(lac, carthage, carthageUser, 'Bel S+2 lumineux aux Berges du Lac 2',
           'Appartement S+2 de 115 m² au 4e étage d’une résidence sécurisée aux Berges du Lac 2. '
@@ -143,9 +151,18 @@ class DemoDataAnnonces {
               'sur le golfe. Parking et ascenseur.',
           2300, 60, ListingStatus.suspended, publishedDaysAgo: 15, views: 74);
       await listing(office, carthage, carthageUser, 'Plateau de bureaux au Centre Urbain Nord',
-          'Plateau de 160 m² aménageable, climatisé, avec places de parking. '
-              'Idéal pour un siège social.',
-          3200, 30, ListingStatus.draft);
+          'Plateau de 110 m² aménageable au Centre Urbain Nord, climatisé, avec places '
+              'de parking. Idéal pour un siège social.',
+          320000, 30, ListingStatus.draft);
+      // Brouillon de la liste : la boutique. (Le brouillon du bureau passe en
+      // « retirée » dès que la vente du M4 le passe en « Vendu ».)
+      final boutique = await property(carthage, agent(1), 'Boutique · Lac 2',
+          PropertyType.shop, DealType.sale, 260000, 45, 0, 'Tunis', 'Les Berges du Lac 2',
+          36.8460, 10.2740, ['parking'], floor: 0, createdDaysAgo: 2);
+      await listing(boutique, carthage, carthageUser, 'Boutique de 45 m² aux Berges du Lac 2',
+          'Boutique de 45 m² en rez-de-chaussée avec vitrine sur rue, climatisation et '
+              'place de parking, aux Berges du Lac 2. Idéale commerce ou showroom.',
+          260000, 60, ListingStatus.draft);
       await listing(soukra, carthage, carthageUser, 'Terrain de 500 m² à La Soukra',
           'Terrain constructible de 500 m² dans une zone résidentielle de La Soukra, '
               'titre bleu, toutes commodités à proximité.',
@@ -157,10 +174,10 @@ class DemoDataAnnonces {
       // ---------- Gammarth Luxury ----------
       final villa = await property(gammarth, null, 'Villa pieds dans l’eau à Gammarth',
           PropertyType.villa, DealType.sale, 2900000, 450, 6, 'La Marsa', 'Gammarth',
-          36.9180, 10.2870, ['parking', 'piscine', 'jardin']);
+          36.9180, 10.2870, ['parking', 'piscine', 'jardin'], landSurface: 700);
       final penthouse = await property(gammarth, null, 'Penthouse avec piscine à Gammarth',
           PropertyType.apartment, DealType.rent, 6500, 220, 3, 'La Marsa', 'Gammarth',
-          36.9120, 10.2900, ['parking', 'piscine', 'ascenseur']);
+          36.9120, 10.2900, ['parking', 'piscine', 'ascenseur'], floor: 7);
       final villaListing = await listing(villa, gammarth, gammarthUser,
           'Villa pieds dans l’eau à Gammarth',
           'Villa contemporaine de 450 m² avec accès direct à la plage : six chambres, '
@@ -243,15 +260,18 @@ class DemoDataAnnonces {
     int ago(int days) => now.subtract(Duration(days: days)).millisecondsSinceEpoch;
     const day = Duration.millisecondsPerDay;
 
-    for (final (title, district, city, price, surface, rooms, lat, lng, text, days) in [
+    for (final (title, district, city, price, surface, rooms, lat, lng, floor, condition,
+            text, days)
+        in [
       ('S+3 familial à El Menzah 5', 'El Menzah 5', 'Tunis', 445000.0, 130.0, 3, 36.8420,
-          10.1700,
+          10.1700, 2, PropertyCondition.good,
           'Appartement S+3 de 130 m² au 2e étage, double séjour, cuisine équipée, '
               'balcon et place de parking. Proche écoles et commerces.', 1),
-      ('S+2 récent à Ennasr', 'Ennasr', 'Ariana', 320000.0, 98.0, 2, 36.8620, 10.1610,
+      ('S+2 récent à Ennasr', 'Ennasr', 'Ariana', 320000.0, 98.0, 2, 36.8620, 10.1610, 1,
+          PropertyCondition.asNew,
           'Appartement S+2 de 98 m² dans une résidence récente avec ascenseur et parking.', 6),
       ('Studio meublé à Lafayette', 'Lafayette', 'Tunis', 210000.0, 52.0, 1, 36.8150,
-          10.1810,
+          10.1810, 0, PropertyCondition.good,
           'Studio de 52 m² rénové, idéal premier achat ou investissement locatif.', 9),
     ]) {
       final property = await db.insert('properties', {
@@ -265,11 +285,13 @@ class DemoDataAnnonces {
         'surface': surface,
         'rooms': rooms,
         'bathrooms': rooms >= 3 ? 2 : 1,
+        'floor': floor,
         'city': city,
         'district': district,
         'latitude': lat,
         'longitude': lng,
         'amenities': 'parking,ascenseur',
+        'condition': condition.name,
         'status': PropertyStatus.available.name,
         'createdAt': ago(days + 5),
       });

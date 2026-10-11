@@ -20,4 +20,6 @@ class AppColors {
   static const success = Color(0xFF2E7D32);
   static const successBg = Color(0xFFE3F4E4);
   static const infoBg = Color(0xFFDDE7F5);
+  static const warning = Color(0xFF8A6410);
+  static const warningBg = Color(0xFFF6ECD6);
 }

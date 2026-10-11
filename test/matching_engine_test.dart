@@ -4,7 +4,7 @@ import 'package:immora_mobile/core/utils/enums.dart';
 import 'package:immora_mobile/module_gestion_annonces/matching/matching_engine.dart';
 import 'package:immora_mobile/module_gestion_annonces/models/listing.dart';
 import 'package:immora_mobile/module_gestion_annonces/models/listing_details.dart';
-import 'package:immora_mobile/module_gestion_annonces/models/property.dart';
+import 'package:immora_mobile/module_gestion_biens/models/property.dart';
 import 'package:immora_mobile/module_gestion_annonces/models/search_criteria.dart';
 
 /// Moteur de matching du Module 5 (BF5.7, BF5.8) :

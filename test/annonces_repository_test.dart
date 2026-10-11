@@ -6,11 +6,12 @@ import 'package:immora_mobile/core/database/database_helper.dart';
 import 'package:immora_mobile/core/errors/app_exception.dart';
 import 'package:immora_mobile/core/utils/constants.dart';
 import 'package:immora_mobile/core/utils/enums.dart';
+import 'package:immora_mobile/module_gestion_annonces/models/app_notification.dart';
 import 'package:immora_mobile/module_gestion_annonces/repositories/favorite_repository.dart';
 import 'package:immora_mobile/module_gestion_annonces/repositories/listing_repository.dart';
 import 'package:immora_mobile/module_gestion_annonces/repositories/matching_repository.dart';
 import 'package:immora_mobile/module_gestion_annonces/models/search_criteria.dart';
-import 'package:immora_mobile/module_gestion_annonces/repositories/property_repository.dart';
+import 'package:immora_mobile/module_gestion_biens/repositories/property_repository.dart';
 
 /// Module 5 : annonces et favoris sur une vraie base SQLite (FFI), créée
 /// avec les données de démonstration.
@@ -40,7 +41,7 @@ void main() {
 
   test('la vitrine ne montre que les annonces publiées, mises en avant d’abord', () async {
     final shown = await listings.publishedListings();
-    expect(shown, hasLength(9));
+    expect(shown, hasLength(10));
     expect(shown.every((d) => d.listing.status == ListingStatus.published), isTrue);
     final featured = shown.takeWhile((d) => d.listing.isFeatured).length;
     expect(featured, 3);
@@ -49,11 +50,11 @@ void main() {
 
   test('l’agence voit ses annonces par statut avec vues et favoris (BF5.3)', () async {
     final counts = await listings.countByStatus(carthage);
-    expect(counts[ListingStatus.published], 7);
-    expect(counts[ListingStatus.draft], 1);
+    expect(counts[ListingStatus.published], 8);
+    expect(counts[ListingStatus.draft], 1); // la boutique (le bureau, lui, est vendu)
     expect(counts[ListingStatus.suspended], 1);
     expect(counts[ListingStatus.expired], 1);
-    expect(counts[ListingStatus.withdrawn], 1);
+    expect(counts[ListingStatus.withdrawn], 2); // L'Aouina (vendu) et le bureau (vendu, M4)
 
     final published = await listings.agencyListings(carthage, status: ListingStatus.published);
     final lac = published.firstWhere((d) => d.property.district == 'Les Berges du Lac 2');
@@ -80,8 +81,11 @@ void main() {
   test('cycle de vie : créer, publier, suspendre, republier (BF5.1, BF5.4)', () async {
     final available = await properties.availableWithoutListing(carthage);
     // El Manar n'a jamais eu d'annonce ; celle de La Soukra est expirée,
-    // donc le bien peut recevoir une nouvelle annonce.
-    expect(available.map((p) => p.district), ['El Manar 2', 'La Soukra']);
+    // donc ces biens peuvent recevoir une nouvelle annonce. S'y ajoutent les
+    // biens du M3 sans annonce (villa de Gammarth, comparable du Lac) et le
+    // duplex du M4.
+    expect(available.map((p) => p.district),
+        ['El Manar 2', 'Amilcar', 'Gammarth', 'La Soukra', 'Les Berges du Lac']);
     final property = available.first;
 
     final id = await listings.create(
@@ -94,7 +98,7 @@ void main() {
     );
     expect((await listings.details(id))!.listing.status, ListingStatus.draft);
     expect((await properties.availableWithoutListing(carthage)).map((p) => p.district),
-        ['La Soukra']);
+        ['Amilcar', 'Gammarth', 'La Soukra', 'Les Berges du Lac']);
 
     // Un bien n'a qu'une annonce en cours.
     expect(
@@ -154,7 +158,9 @@ void main() {
   });
 
   test('migration v2 → v4 : une ancienne base reçoit les tables et la démo du M5', () async {
-    for (final table in ['notifications', 'search_criteria', 'favorites', 'listings', 'properties']) {
+    // La table visits (M6) référence properties et listings : elle part en premier.
+    for (final table
+        in ['visits', 'notifications', 'search_criteria', 'favorites', 'listings', 'properties']) {
       await db.execute('DROP TABLE $table');
     }
     await db.setVersion(2);
@@ -162,7 +168,7 @@ void main() {
 
     db = await DatabaseHelper.instance.database;
     expect(await db.getVersion(), dbVersion);
-    expect(await listings.countByStatus(carthage), containsPair(ListingStatus.published, 7));
+    expect(await listings.countByStatus(carthage), containsPair(ListingStatus.published, 8));
     expect(await matching.criteria(client), isNotNull);
     expect(await favorites.clientFavorites(client), hasLength(3));
   });
@@ -170,8 +176,10 @@ void main() {
   test('démo : critères mémorisés et alertes déjà calculées (BF5.6, BF5.9)', () async {
     final c = (await matching.criteria(client))!;
     expect(c.summary, startsWith('achat · appartement · 300K–500K TND · Tunis'));
-    final alerts = await matching.notifications(client);
-    expect(alerts, hasLength(2)); // Lac 2 et El Menzah 5 : 100 %
+    final alerts = (await matching.notifications(client))
+        .where((n) => n.type == AppNotification.newListing)
+        .toList(); // Lac 2 et El Menzah 5 : 100 % (les notifications de visite du M6 ont score null)
+    expect(alerts, hasLength(2));
     expect(alerts.every((n) => n.score! >= 80), isTrue);
     expect(alerts.where((n) => !n.isRead), hasLength(1));
   });

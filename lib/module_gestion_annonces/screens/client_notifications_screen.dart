@@ -17,7 +17,7 @@ String timeAgo(int millis) {
 }
 
 /// « Notifications » [clientNotifs] — alertes « nouvelle annonce pour vous »
-/// (BF5.9). Le Module 6 y ajoutera les confirmations et rappels de visite.
+/// (BF5.9) et confirmations, annulations et comptes rendus de visite (M6).
 class ClientNotificationsScreen extends StatefulWidget {
   const ClientNotificationsScreen({super.key});
 
@@ -90,6 +90,9 @@ class _NotificationTile extends StatelessWidget {
     final n = notification;
     final (IconData icon, Tone tone) = switch (n.type) {
       AppNotification.newListing => (Icons.auto_awesome, toneGold),
+      AppNotification.visitConfirmed => (Icons.check_circle_outline, toneGreen),
+      AppNotification.visitCancelled => (Icons.cancel_outlined, toneRed),
+      AppNotification.visitDone => (Icons.task_alt, toneBlue),
       _ => (Icons.notifications_none, toneBlue),
     };
     return ListTile(

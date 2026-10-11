@@ -14,6 +14,8 @@ import 'package:immora_mobile/module_authentification/screens/login_screen.dart'
 import 'package:immora_mobile/module_gestion_agences/models/agency_views.dart';
 import 'package:immora_mobile/module_gestion_agences/providers/agency_provider.dart';
 import 'package:immora_mobile/module_gestion_annonces/screens/listing_list_screen.dart';
+import 'package:immora_mobile/module_gestion_annonces/screens/visit_calendar_screen.dart';
+import 'package:immora_mobile/module_gestion_ventes/screens/finance_stats_screen.dart';
 
 /// Accueil du rôle « agence » (BF1.6) : son abonnement et ses limites (BF2.8),
 /// son score d'activité (BF2.6), ses agents et leur performance.
@@ -61,9 +63,7 @@ class _AgencySpaceScreenState extends State<AgencySpaceScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: adminAppBar(context, 'Mon agence', actions: [
-        IconButton(tooltip: 'Déconnexion', icon: const Icon(Icons.logout), onPressed: _logout),
-      ]),
+      appBar: adminAppBar(context, 'Mon agence'),
       body: FutureBuilder<AgencySummary?>(
         future: _future,
         builder: (context, snap) {
@@ -162,6 +162,24 @@ class _AgencySpaceScreenState extends State<AgencySpaceScreen> {
                       title: 'Mes annonces',
                       subtitle: 'Publier, suspendre, prolonger · vues et favoris',
                       onTap: () => _open(ListingListScreen(agencyId: s.agency.id!)),
+                    ),
+                    const Divider(height: 1, color: AppColors.background),
+                    // Module 6 (Ing. 3) — demandes de visite de l'agence.
+                    NavTile(
+                      icon: Icons.event_outlined,
+                      tone: toneAgent,
+                      title: 'Visites',
+                      subtitle: 'Demandes à traiter : confirmer, reprogrammer',
+                      onTap: () => _open(VisitCalendarScreen(agencyId: s.agency.id!)),
+                    ),
+                    const Divider(height: 1, color: AppColors.background),
+                    // Module 4 (Ing. 2) — chiffres des ventes et locations.
+                    NavTile(
+                      icon: Icons.account_balance_wallet_outlined,
+                      tone: toneGold,
+                      title: 'Finances',
+                      subtitle: 'Ventes, encaissements et commissions par agent',
+                      onTap: () => _open(FinanceStatsScreen(agencyId: s.agency.id!)),
                     ),
                     const Divider(height: 1, color: AppColors.background),
                     NavTile(
